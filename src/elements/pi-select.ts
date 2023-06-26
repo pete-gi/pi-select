@@ -10,6 +10,7 @@ export default class PiSelect extends HTMLElement {
     "name",
     "required",
     "validationmessage",
+    "wrap",
   ];
 
   public shadowRoot: ShadowRoot;
@@ -42,7 +43,6 @@ export default class PiSelect extends HTMLElement {
     this._multiple = v;
   }
 
-  private originalLabel: string = "";
   private _label: string = "";
   public get label(): string {
     return this._label;
@@ -116,9 +116,9 @@ export default class PiSelect extends HTMLElement {
     return this.shadowRoot.querySelector<HTMLSpanElement>('[part="value"]')!;
   }
 
-  private get markerElement(): HTMLSpanElement {
-    return this.shadowRoot.querySelector<HTMLSpanElement>('[part="marker"]')!;
-  }
+  // private get markerElement(): HTMLSpanElement {
+  //   return this.shadowRoot.querySelector<HTMLSpanElement>('[part="marker"]')!;
+  // }
 
   private get listboxElement(): HTMLDivElement {
     return this.shadowRoot.querySelector<HTMLDivElement>('[part="listbox"]')!;
@@ -126,6 +126,52 @@ export default class PiSelect extends HTMLElement {
 
   public get options(): PiOption[] {
     return Array.from(this.querySelectorAll<PiOption>("pi-option"));
+  }
+
+  private get currentOption(): PiOption | null {
+    const optionElement = document.activeElement as PiOption | null;
+    if (optionElement && this.options.includes(optionElement)) {
+      return optionElement;
+    }
+    return null;
+  }
+
+  private get currentOptionIndex(): number | null {
+    if (this.currentOption) {
+      const index = this.options.findIndex(
+        (option) => option === this.currentOption
+      );
+      if (index >= 0) {
+        return index;
+      }
+    }
+    return null;
+  }
+
+  private get isFirstElement(): boolean {
+    return this.currentOptionIndex === 0;
+  }
+
+  private get isLastElement(): boolean {
+    return this.currentOptionIndex === this.options.length - 1;
+  }
+
+  private get nextOption(): PiOption {
+    if (this.currentOptionIndex !== null) {
+      if (!this.isLastElement) {
+        return this.options[this.currentOptionIndex + 1];
+      }
+    }
+    return this.options[0];
+  }
+
+  private get prevOption(): PiOption {
+    if (this.currentOptionIndex) {
+      if (!this.isFirstElement) {
+        return this.options[this.currentOptionIndex - 1];
+      }
+    }
+    return this.options[this.options.length - 1];
   }
 
   constructor() {
@@ -142,10 +188,11 @@ export default class PiSelect extends HTMLElement {
   }
 
   public connectedCallback() {
-    this.originalLabel = this.getAttribute("label") || "";
+    // this.originalLabel = this.getAttribute("label") || "";
     this.listenForButtonClickEvent();
-    this.listenForDocumentClickEvent();
+    this.listenForCloseEvents();
     this.listenForBlurEvent();
+    this.listenForNavigationEvents();
   }
 
   public attributeChangedCallback(
@@ -200,7 +247,7 @@ export default class PiSelect extends HTMLElement {
     });
   }
 
-  private listenForDocumentClickEvent() {
+  private listenForCloseEvents() {
     document.addEventListener("click", () => {
       this.close();
     });
@@ -220,6 +267,23 @@ export default class PiSelect extends HTMLElement {
       () => {
         if (this.matches(":not(:focus-within)")) {
           this.close();
+        }
+      },
+      { capture: true }
+    );
+  }
+
+  private listenForNavigationEvents() {
+    this.addEventListener(
+      "keydown",
+      (e: KeyboardEvent) => {
+        switch (e.key) {
+          case "ArrowDown":
+            this.next();
+            break;
+          case "ArrowUp":
+            this.prev();
+            break;
         }
       },
       { capture: true }
@@ -282,6 +346,14 @@ export default class PiSelect extends HTMLElement {
 
   public toggle() {
     this.isOpen = !this.isOpen;
+  }
+
+  public next() {
+    this.nextOption.inputElement.focus();
+  }
+
+  public prev() {
+    this.prevOption.inputElement.focus();
   }
 }
 

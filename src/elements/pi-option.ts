@@ -49,11 +49,11 @@ export default class PiOption extends HTMLElement {
     return value;
   }
 
-  private get wrapperElement(): HTMLLabelElement {
-    return this.shadowRoot.querySelector<HTMLLabelElement>('[part="wrapper"]')!;
-  }
+  // private get wrapperElement(): HTMLLabelElement {
+  //   return this.shadowRoot.querySelector<HTMLLabelElement>('[part="wrapper"]')!;
+  // }
 
-  private get inputElement(): HTMLInputElement {
+  public get inputElement(): HTMLInputElement {
     return this.shadowRoot.querySelector<HTMLInputElement>('[part="input"]')!;
   }
 
