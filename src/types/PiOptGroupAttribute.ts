@@ -1,1 +1,1 @@
-export type PiOptGroupAttribute = "label";
+export type PiOptGroupAttribute = "label" | "disabled";

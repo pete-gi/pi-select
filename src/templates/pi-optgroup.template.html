@@ -4,8 +4,12 @@
 </div>
 
 <style>
-  :host() {
+  :host {
     display: block;
+  }
+
+  :host([disabled]) {
+    color: grey;
   }
 
   [part="label"] {

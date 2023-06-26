@@ -1,1 +1,1 @@
-export type PiOptionAttribute = "value" | "selected";
+export type PiOptionAttribute = "value" | "selected" | "disabled";

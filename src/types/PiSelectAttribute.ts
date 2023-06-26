@@ -3,5 +3,6 @@ export type PiSelectAttribute =
   | "label"
   | "name"
   | "required"
+  | "disabled"
   | "validationmessage"
   | "wrap";

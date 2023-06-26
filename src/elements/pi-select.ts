@@ -10,6 +10,7 @@ export default class PiSelect extends HTMLElement {
     "label",
     "name",
     "required",
+    "disabled",
     "validationmessage",
     "wrap",
   ];
@@ -42,6 +43,14 @@ export default class PiSelect extends HTMLElement {
   }
   public set multiple(v: boolean) {
     this._multiple = v;
+  }
+
+  private _disabled: boolean = false;
+  public get disabled(): boolean {
+    return this._disabled;
+  }
+  public set disabled(v: boolean) {
+    this._disabled = v;
   }
 
   private _label: string = "";
@@ -121,12 +130,23 @@ export default class PiSelect extends HTMLElement {
     return this.shadowRoot.querySelector<HTMLDivElement>('[part="listbox"]')!;
   }
 
-  public get options(): PiOption[] {
+  public get allOptions(): PiOption[] {
     return Array.from(this.querySelectorAll<PiOption>("pi-option") || []);
   }
 
-  public get optGroups(): PiOptGroup[] {
+  public get options(): PiOption[] {
+    return this.allOptions.filter(
+      (option) =>
+        !option.disabled && option.optGroup && !option.optGroup?.disabled
+    );
+  }
+
+  public get allOptGroups(): PiOptGroup[] {
     return Array.from(this.querySelectorAll<PiOptGroup>("pi-optgroup") || []);
+  }
+
+  public get optGroups(): PiOptGroup[] {
+    return this.allOptGroups.filter((group) => !group.disabled);
   }
 
   private get currentOption(): PiOption | null {
@@ -222,6 +242,13 @@ export default class PiSelect extends HTMLElement {
           this.required = true;
         } else {
           this.required = false;
+        }
+        break;
+      case "disabled":
+        if (value !== null && value !== "false") {
+          this.disabled = true;
+        } else {
+          this.disabled = false;
         }
         break;
     }

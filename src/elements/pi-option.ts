@@ -2,9 +2,14 @@ import template from "../templates/pi-option.template.html?raw";
 import { PiOptionAttribute } from "../types/PiOptionAttribute";
 import { PiOptionType } from "../types/PiOptionType";
 import PiSelect from "./pi-select";
+import PiOptGroup from "./pi-optgroup";
 
 export default class PiOption extends HTMLElement {
-  public static observedAttributes: PiOptionAttribute[] = ["value", "selected"];
+  public static observedAttributes: PiOptionAttribute[] = [
+    "value",
+    "selected",
+    "disabled",
+  ];
 
   public shadowRoot: ShadowRoot;
 
@@ -27,12 +32,25 @@ export default class PiOption extends HTMLElement {
     this.setParentValue();
   }
 
+  private _disabled: boolean = false;
+  public get disabled(): boolean {
+    return this._disabled;
+  }
+  public set disabled(v: boolean) {
+    this._disabled = v;
+    this.inputElement.disabled = this._disabled;
+  }
+
   public get type(): PiOptionType {
     return this.parent.multiple ? "checkbox" : "radio";
   }
 
-  private get parent(): PiSelect {
+  public get parent(): PiSelect {
     return this.closest<PiSelect>("pi-select")!;
+  }
+
+  public get optGroup(): PiOptGroup | null {
+    return this.closest<PiOptGroup>("pi-optgroup");
   }
 
   public get label(): string {
@@ -97,6 +115,14 @@ export default class PiOption extends HTMLElement {
         } else {
           this.selected = false;
         }
+        break;
+      case "disabled":
+        if (value !== null && value !== "false") {
+          this.disabled = true;
+        } else {
+          this.disabled = false;
+        }
+        break;
     }
   }
 
