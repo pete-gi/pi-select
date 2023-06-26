@@ -1,0 +1,22 @@
+<span part="label"></span>
+<div part="options">
+  <slot></slot>
+</div>
+
+<style>
+  :host() {
+    display: block;
+  }
+
+  [part="label"] {
+    font-weight: bold;
+  }
+
+  [part="label"]:empty {
+    display: none;
+  }
+
+  [part="options"] {
+    padding-inline-start: 0.5rem;
+  }
+</style>

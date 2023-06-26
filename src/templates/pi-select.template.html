@@ -1,7 +1,11 @@
 <button part="button" type="button">
-  <span part="label"></span>
-  <span part="value"></span>
-  <span part="marker"><slot name="marker"></slot></span>
+  <span part="labelvalue">
+    <span part="label"></span>
+    <span part="value"></span>
+  </span>
+  <span part="marker">
+    <slot name="marker">⏷</slot>
+  </span>
 </button>
 <div part="listbox">
   <slot></slot>
@@ -12,8 +16,8 @@
     position: relative;
   }
 
-  [part="button"] {
-    min-width: 5rem;
+  [part="labelvalue"] {
+    min-width: 10rem;
     max-width: 9rem;
     text-align: left;
     overflow: hidden;
@@ -27,7 +31,7 @@
     top: 100%;
     left: 0;
     width: 100%;
-    max-height: 5rem;
+    max-height: 10rem;
     border: 1px solid black;
     background: white;
     overflow-y: auto;

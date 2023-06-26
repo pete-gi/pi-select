@@ -1,5 +1,6 @@
 import template from "../templates/pi-select.template.html?raw";
 import { PiSelectAttribute } from "../types/PiSelectAttribute";
+import PiOptGroup from "./pi-optgroup";
 import PiOption from "./pi-option";
 
 export default class PiSelect extends HTMLElement {
@@ -116,16 +117,16 @@ export default class PiSelect extends HTMLElement {
     return this.shadowRoot.querySelector<HTMLSpanElement>('[part="value"]')!;
   }
 
-  // private get markerElement(): HTMLSpanElement {
-  //   return this.shadowRoot.querySelector<HTMLSpanElement>('[part="marker"]')!;
-  // }
-
   private get listboxElement(): HTMLDivElement {
     return this.shadowRoot.querySelector<HTMLDivElement>('[part="listbox"]')!;
   }
 
   public get options(): PiOption[] {
-    return Array.from(this.querySelectorAll<PiOption>("pi-option"));
+    return Array.from(this.querySelectorAll<PiOption>("pi-option") || []);
+  }
+
+  public get optGroups(): PiOptGroup[] {
+    return Array.from(this.querySelectorAll<PiOptGroup>("pi-optgroup") || []);
   }
 
   private get currentOption(): PiOption | null {
@@ -188,7 +189,6 @@ export default class PiSelect extends HTMLElement {
   }
 
   public connectedCallback() {
-    // this.originalLabel = this.getAttribute("label") || "";
     this.listenForButtonClickEvent();
     this.listenForCloseEvents();
     this.listenForBlurEvent();

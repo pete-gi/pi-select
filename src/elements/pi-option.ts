@@ -63,7 +63,6 @@ export default class PiOption extends HTMLElement {
 
   constructor() {
     super();
-    this.attachInternals();
     this.attachShadow({ mode: "open" });
     this.appendTemplate();
   }

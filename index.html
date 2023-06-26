@@ -8,10 +8,18 @@
   <body>
     <form>
       <pi-select label="Choose the number" name="number" multiple required>
-        <pi-option value="one">One</pi-option>
-        <pi-option value="two">Two</pi-option>
-        <pi-option value="three">Three</pi-option>
-        <pi-option value="four">Four</pi-option>
+        <pi-optgroup label="First four numbers">
+          <pi-option value="one">One</pi-option>
+          <pi-option value="two">Two</pi-option>
+          <pi-option value="three">Three</pi-option>
+          <pi-option value="four">Four</pi-option>
+        </pi-optgroup>
+        <pi-optgroup label="Next four numbers">
+          <pi-option value="five">Five</pi-option>
+          <pi-option value="six">Six</pi-option>
+          <pi-option value="seven">Seven</pi-option>
+          <pi-option value="eight">Eight</pi-option>
+        </pi-optgroup>
       </pi-select>
       <button type="submit">Submit</button>
       <button type="reset">Reset</button>
