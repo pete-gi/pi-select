@@ -3,7 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
+    <title>PiSelect custom element with PiOption and PiOptGroup</title>
+    <style>
+      pi-select {
+        min-width: 10rem;
+      }
+    </style>
   </head>
   <body>
     <form>
@@ -11,7 +16,7 @@
         <pi-optgroup label="First four numbers">
           <pi-option value="one">One</pi-option>
           <pi-option value="two">Two</pi-option>
-          <pi-option value="three">Three</pi-option>
+          <pi-option value="three" disabled>Three</pi-option>
           <pi-option value="four">Four</pi-option>
         </pi-optgroup>
         <pi-optgroup label="Next four numbers" disabled>
@@ -28,12 +33,11 @@
     <script type="module" src="/src/index.ts"></script>
     <script>
       const form = document.querySelector("form");
-      // const piSelect = document.querySelector("pi-select");
       form.addEventListener("submit", (e) => {
         e.preventDefault();
         const formData = new FormData(form);
         for (const entry of formData) {
-          console.log(entry[0], "=", entry[1]);
+          console.log(`${entry[0]}=${entry[1]}`);
         }
       });
     </script>

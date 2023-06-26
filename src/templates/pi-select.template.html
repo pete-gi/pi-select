@@ -13,13 +13,18 @@
 
 <style>
   :host {
+    display: inline-block;
     position: relative;
+    text-align: left;
+  }
+
+  [part="button"] {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
   }
 
   [part="labelvalue"] {
-    min-width: 10rem;
-    max-width: 9rem;
-    text-align: left;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
