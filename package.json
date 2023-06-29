@@ -1,5 +1,5 @@
 {
-  "name": "@pete-gi/pi-select",
+  "name": "@petegi/pi-select",
   "description": "CustomElement which can be used instead of <select> or <selectmenu> elements.",
   "private": false,
   "version": "0.1.0",

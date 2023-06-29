@@ -20,16 +20,16 @@ CustomElement doesn't have any dependencies other than `vite` used to build thin
 ## Instalation
 
 ```
-npm install @pete-gi/pi-select
+npm install @petegi/pi-select
 ```
 
 ## Usage
 
 ```
 // Include the script
-import "path-to-@pete-gi/pi-select"
+import "path-to-@petegi/pi-select"
 // or
-<script src="path-to-@pete-gi/pi-select"></script>
+<script src="path-to-@petegi/pi-select"></script>
 
 // Use in your HTML
 <form>
