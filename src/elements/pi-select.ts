@@ -7,12 +7,11 @@ export default class PiSelect extends HTMLElement {
   public static formAssociated = true;
   public static observedAttributes: PiSelectAttribute[] = [
     "multiple",
-    "label",
+    "placeholder",
     "name",
     "required",
     "disabled",
     "validationmessage",
-    "wrap",
   ];
 
   public shadowRoot: ShadowRoot;
@@ -53,13 +52,13 @@ export default class PiSelect extends HTMLElement {
     this._disabled = v;
   }
 
-  private _label: string = "";
-  public get label(): string {
-    return this._label;
+  private _placeholder: string = "";
+  public get placeholder(): string {
+    return this._placeholder;
   }
-  public set label(v: string) {
-    this._label = v;
-    this.labelElement.innerText = this._label;
+  public set placeholder(v: string) {
+    this._placeholder = v;
+    this.placeholderElement.innerText = this._placeholder;
   }
 
   private _name: string = "";
@@ -118,8 +117,10 @@ export default class PiSelect extends HTMLElement {
     return this.shadowRoot.querySelector<HTMLButtonElement>('[part="button"]')!;
   }
 
-  private get labelElement(): HTMLSpanElement {
-    return this.shadowRoot.querySelector<HTMLSpanElement>('[part="label"]')!;
+  private get placeholderElement(): HTMLSpanElement {
+    return this.shadowRoot.querySelector<HTMLSpanElement>(
+      '[part="placeholder"]'
+    )!;
   }
 
   private get valueElement(): HTMLSpanElement {
@@ -221,8 +222,8 @@ export default class PiSelect extends HTMLElement {
     value: string | string[] | null
   ) {
     switch (attr) {
-      case "label":
-        this.label = value ? value.toString() : "";
+      case "placeholder":
+        this.placeholder = value ? value.toString() : "";
         break;
       case "name":
         this.name = value?.toString() || "";
@@ -354,9 +355,9 @@ export default class PiSelect extends HTMLElement {
       .join(", ");
 
     if (value) {
-      this.labelElement.hidden = true;
+      this.placeholderElement.hidden = true;
     } else {
-      this.labelElement.hidden = false;
+      this.placeholderElement.hidden = false;
     }
 
     this.valueElement.textContent = value;

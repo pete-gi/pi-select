@@ -1,8 +1,7 @@
 export type PiSelectAttribute =
   | "multiple"
-  | "label"
+  | "placeholder"
   | "name"
   | "required"
   | "disabled"
-  | "validationmessage"
-  | "wrap";
+  | "validationmessage";
