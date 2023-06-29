@@ -1,4 +1,5 @@
 {
+  "version": "0.1.1",
   "name": "@petegi/pi-select",
   "description": "CustomElement which can be used instead of <select> or <selectmenu> elements.",
   "keywords": [
@@ -9,8 +10,8 @@
     "web component"
   ],
   "private": false,
-  "version": "0.1.0",
   "type": "module",
+  "types": "dist/index.d.ts",
   "module": "dist/pi-select.js",
   "author": {
     "name": "Piotr Golczyk",
