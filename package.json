@@ -1,6 +1,13 @@
 {
   "name": "@petegi/pi-select",
   "description": "CustomElement which can be used instead of <select> or <selectmenu> elements.",
+  "keywords": [
+    "select",
+    "selectmenu",
+    "pi-select",
+    "custom element",
+    "web component"
+  ],
   "private": false,
   "version": "0.1.0",
   "type": "module",
