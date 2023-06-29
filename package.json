@@ -1,7 +1,7 @@
 {
   "name": "@pete-gi/pi-select",
   "description": "CustomElement which can be used instead of <select> or <selectmenu> elements.",
-  "private": true,
+  "private": false,
   "version": "0.1.0",
   "type": "module",
   "module": "dist/pi-select.js",
