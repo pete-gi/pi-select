@@ -11,6 +11,8 @@ Styles are pretty raw, just to position elements in the right way. Buttons and i
 
 ## Requirements
 
+Node v16+.
+
 Default raw stylings are made using `flex` and `:has()` selector. You can change them if you'd like to, as it's possible to style every part of the component.
 
 CustomElement doesn't have any dependencies other than `vite` used to build things up (devDep only).
